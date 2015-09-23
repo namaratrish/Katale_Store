@@ -16,8 +16,27 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.conf.urls import url, patterns
+from Katale_Store import settings
+from Katale import urls as Katale_urls
+
+
 urlpatterns = [
-    url(r'^Katale/', include('Katale.urls')),
+    url(r'^Katale/', include(Katale_urls, namespace='Katale')),
     url(r'^admin/', include(admin.site.urls)),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += patterns(
+        'django.views.static', (r'media/(?P<path>.*)',
+                                'serve',
+                                {'document_root': settings.MEDIA_ROOT})
+    )
+
+# THE IF LETS US CHECK IF THE PROJECT IS BEING RUN IN DEBUG MODE,I.E DEBUG IS TRUE
+
+# THE NEW PATTERN
+# ADDED MINS IF ANY FILE IS REQUESTED
+# WITH A URL STATING WITH MEDIA/ THE REQUEST
+# WILL B PASD TO THE DJANGO.VIEWS.STATIC VIEW

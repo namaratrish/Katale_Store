@@ -102,6 +102,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# PROJECT_PATH = os.path.join(__file__
+# )
+MEDIA_ROOT = BASE_DIR + '/media/'
+#media root tells django wea uploaded fies should be stored on local disk
 
-MEDIA_ROOT = 'B:/katale_Store/media/'
 MEDIA_URL = '/media/'
+#MEDIA_URL DEFINES THE BASE URL FRM WICH MEDIA FILES R ACCESSIBLE

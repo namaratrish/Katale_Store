@@ -16,7 +16,7 @@ class UserForm(ModelForm):
 
     def __init__(self, data={}):
         super(UserForm, self).__init__(data=data)
-        self.fields['password_again'] = forms.CharField(widget=forms.PasswordInput)
+        self.fields['password_again'] = forms.CharField(widget=forms.PasswordInput(attrs=dict(required=True)))
 
     def clean(self):
         cleaned_data = super(UserForm, self).clean()
@@ -37,13 +37,9 @@ class UserForm(ModelForm):
 class UserRegistrationForm(ModelForm):
     city = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label="City")
     address = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label="Address")
-    phone_number = forms.CharField(widget=forms.TextInput(attrs=dict(max_length=15)))
-    birthdate = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}))
+    phone_number = forms.IntegerField(widget=forms.TextInput(attrs=dict(max_length=15, required=True)))
+    birthdate = forms.DateField(widget=forms.TextInput(attrs=dict({'placeholder': 'yyyy-mm-dd'}, required=True)),)
 
     class Meta:
         model = Users
         fields = ['city', 'address', 'phone_number', 'birthdate']
-
-
-
-

@@ -15,7 +15,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="{% url 'Katale:products' category.id %}">
+										<a href="{% url 'Katale:products' category.id %}">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
 											{{category.category}}
 										</a>
@@ -26,6 +26,9 @@
 							{% endif %}
 
 						</div><!--/category-products-->
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/shipping.jpg' %}" alt="" />
+						</div>
                     </div>
                 </div>
 
@@ -57,6 +60,11 @@
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>-->
+
+									<button type="button" class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
 								</span>
 								<p>{{product.description}}</p>
 

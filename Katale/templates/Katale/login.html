@@ -13,8 +13,8 @@
 						<h2>Login to your account</h2>
 						<form action="/Katale/login/" method="post">
 							{% csrf_token %}
-							{% if form.errors %}
-							<p>Password or username incorrect</p>
+							{% if message %}
+							<p>Invalid login details</p>
 							{% endif%}
 							<input type="text" placeholder="Username" name="username" />
 							<input type="password" placeholder="Password"  name="password"/>
@@ -31,16 +31,22 @@
 						<h2>New User Signup!</h2>
 
 						<form method="post" action="/Katale/signup/">
-                              {% csrf_token %}
-							  {{ user_form.as_p }}
-                              {{ user_profile.as_p }}
-							{% if user_profile.errors %}-->
-						         {% for field in user_profile %}
-							        {% if field.errors %}
-							           <p>{{field.errors|striptags}}</p>
-							        {% endif %}
-							     {% endfor %}
-						      {% endif %}
+							{% csrf_token %}
+
+						<!--	{% if errors %}
+							{% for error in errors %}
+							<p style="color:red">{{ error }}</p>
+							{% endfor %}
+							{% endif %}
+
+							{% if error %}
+							{% for error in error %}
+							<p style="color:blue">{{ error }}</p>
+							{% endfor %}
+							{% endif %}
+-->
+							{{ user_form.as_p }}
+							{{ user_profile.as_p }}
 
 							<button type="submit" class="btn btn-default">Signup</button>
 						</form>

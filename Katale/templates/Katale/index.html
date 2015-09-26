@@ -17,13 +17,13 @@
 						
 						<div class="carousel-inner">
 							<div class="item active">
-								<div class="col-sm-6">
+								<div class="col-sm-6">-->
 									<h1><span>KATALE</span></h1>
 									<h2>No1 Online Store</h2>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="{% static 'images/home/girl1.jpg' %}" class="girl img-responsive" alt="" />
+									<img src="{% static 'images/home/girl1.jpg' %}"  alt=""/>
 									<!--<img src="{% static 'images/home/pricing.png' %}"  class="pricing" alt="" />-->
 								</div>
 							</div>
@@ -67,7 +67,7 @@
 	<section>
 		<div class="container">
 			<div class="row">
-							<div class="col-sm-3">
+				<div class="col-sm-3">
 					<div class="left-sidebar">
 						<h2>Category</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
@@ -76,8 +76,8 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+										<a href="{% url 'Katale:products' category.id %}" >
+											<!--<span class="badge pull-right"><i class="fa fa-plus"></i></span>-->
 											{{category.category}}
 										</a>
 									</h4>
@@ -105,9 +105,9 @@
 								<div class="single-products">
 										<div class="productinfo text-center">
 											<a href= "{% url 'Katale:details' product.id %}" />
-											<img src="{{product.image.url}}" alt="" width="225" height="195" />
+											<img src="{{product.image.url}}" alt="" width="225" height="230" />
 										    </a>
-											<h2>{{ product.price }}</h2>
+											<h2>UGX{{ product.price }}</h2>
 										    <p>{{ product.product_name }}</p>
 
 											<!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->

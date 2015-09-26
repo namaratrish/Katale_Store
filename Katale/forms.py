@@ -1,3 +1,5 @@
+from django.forms.extras import SelectDateWidget
+
 __author__ = 'LT10'
 
 from django import forms
@@ -5,6 +7,8 @@ from django.core.exceptions import ValidationError
 from .models import Users
 from django.forms import ModelForm
 from django.contrib.auth.models import User
+
+BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
 
 
 class UserForm(ModelForm):
@@ -38,7 +42,8 @@ class UserRegistrationForm(ModelForm):
     city = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label="City")
     address = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label="Address")
     phone_number = forms.IntegerField(widget=forms.TextInput(attrs=dict(max_length=15, required=True)))
-    birthdate = forms.DateField(widget=forms.TextInput(attrs=dict({'placeholder': 'yyyy-mm-dd'}, required=True)),)
+    #birthdate = forms.DateField(widget=forms.TextInput(attrs=dict({'placeholder': 'yyyy-mm-dd'}, required=True)),)
+    birthdate = forms.DateField(widget=SelectDateWidget(years = range(2015, 1950, -1)))
 
     class Meta:
         model = Users

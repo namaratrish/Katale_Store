@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
@@ -35,13 +36,14 @@ def product_details(request, product_id):
 def products(request, category_id):
     category_list = Category.objects.order_by('created_at')
 
-    product = Product.objects.get(pk=product_id)
+    product = Product.objects.filter(category_id=category_id)
 
-    return render(request, 'Katale/details.html', {'categories': category_list, 'product': product})
+    return render(request, 'Katale/products.html', {'categories': category_list, 'products': product})
 
 
 def sign_up(request):
     registered = False
+    category_list = Category.objects.order_by('created_at')
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         user_profile = UserRegistrationForm(request.POST)
@@ -59,15 +61,21 @@ def sign_up(request):
             userp.save()
             registered = True
 
-            return render_to_response('Katale/index.html', {}, RequestContext(request))
-        # else:
+            # return render_to_response('Katale/index.html', {}, RequestContext(request))
+            return render(request, 'Katale/index.html', {'categories': category_list})
+
+        else:
+            form_errors = user_form.errors
+            formm_errors = user_profile.errors
+            return render(request, 'Katale/login.html', {'errors': form_errors, 'error': formm_errors, 'user_form': user_form, 'user_profile': user_profile})
+            # print user_form.errors, user_profile.errors
         #     print user_profile.is_valid()
         #     print user_profile.errors
             # return HttpResponseRedirect(reverse('Katale:signup'))
     else:
         user_form = UserForm()
         user_profile = UserRegistrationForm()
-        return render(request, 'Katale/login.html', {'user_form': user_form, 'user_profile': user_profile})
+    return render(request, 'Katale/login.html', {'user_form': user_form, 'user_profile': user_profile, 'categories': category_list})
 
 
 def user_login(request):
@@ -78,14 +86,10 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                # return HttpResponseRedirect('/Tunda/index/')
-                return HttpResponseRedirect('/Katale/')
 
-                # return render_to_response('Katale/index.html', {}, RequestContext(request))
+                return HttpResponseRedirect('/Katale/')
             else:
-                return HttpResponse('your account is disabled')
-                # else:
-                #return HttpResponse('Invalid login details provided ')
+                return render(request, 'Katale/login.html', {})
     else:
         return render(request, 'Katale/login.html', {})
 

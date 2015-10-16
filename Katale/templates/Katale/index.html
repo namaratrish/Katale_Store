@@ -82,9 +82,12 @@
 										</a>
 									</h4>
 								</div>
+
 							</div>
 							{% endfor %}
 							{% endif %}
+
+
 
 						</div><!--/category-products-->
 						<div class="shipping text-center"><!--shipping-->
@@ -111,8 +114,15 @@
 										    </a>
 											<h2>UGX{{ product.price }}</h2>
 										    <p>{{ product.product_name }}</p>
+											<form method="post" action="." >
+										        {% csrf_token %}
+												<input type="hidden" name="product_id" value="{{ product.id }}" />
+												<button type="submit" class="btn btn-fefault cart" value="Add">
+													<i class="fa fa-shopping-cart"></i>
+													Add to cart</button>
+											</form>
 
-											<!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
+
 										</div>
 
 								</div>

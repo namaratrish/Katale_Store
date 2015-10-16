@@ -41,8 +41,31 @@
 
 							<div class="view-product">
 								<img src="{{product.image.url}}" alt="" />
-
 							</div>
+
+
+							<!--<div id="similar-product" class="carousel slide" data-ride="carousel">-->
+								<!--{% if category_item %}-->
+								<!--{% for product in category_item %}-->
+
+								  <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
+								    <!--<div class="carousel-inner">-->
+										<!--<div>-->
+										  <!--<a href=""><img src="{{product.image.url}}" alt="" width="85" height="84"></a>-->
+
+										<!--</div>-->
+									<!--</div>-->
+
+								  <!--&lt;!&ndash; Controls &ndash;&gt;-->
+								  <!--<a class="left item-control" href="#similar-product" data-slide="prev">-->
+									<!--<i class="fa fa-angle-left"></i>-->
+								  <!--</a>-->
+								  <!--<a class="right item-control" href="#similar-product" data-slide="next">-->
+									<!--<i class="fa fa-angle-right"></i>-->
+								  <!--</a>-->
+								<!--{% endfor %}-->
+								<!--{% endif %}-->
+							<!--</div>-->
 
 
 						</div>
@@ -54,25 +77,24 @@
 								<!--<img src="images/product-details/rating.png" alt="" />-->
 								<span>
 									<span>Shs {{product.price}}</span>
-									<!--<label>Quantity:</label>-
-									<input type="text" value="3" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</button>-->
 
-									<button type="button" class="btn btn-fefault cart">
+								</span>
+								<p><b>Description:</b>{{product.description}}</p>
+
+
+								<p><b>Availability:</b> In Stock</p>
+								<p><b>Condition:</b> New</p>
+								<form method="post" action="{% url 'Katale:details' product.id %}" >
+										{% csrf_token %}
+										{{ cart_form.as_p}}
+
+									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>
-								</span>
-								<p>{{product.description}}</p>
+									</form>
 
 								{% endif %}
-								<!--<p><b>Availability:</b> In Stock</p>
-								<p><b>Condition:</b> New</p>
-								<p><b>Brand:</b> E-SHOPPER</p>
-									<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>-->
 							</div><!--/product-information-->
 
 						</div>

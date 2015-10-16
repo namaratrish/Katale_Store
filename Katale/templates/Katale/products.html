@@ -20,8 +20,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="{% url 'Katale:products' category.id %}">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                    <a href="{% url 'Katale:products' category.id %}" >
                                         {{category.category}}
                                     </a>
                                 </h4>
@@ -47,10 +46,22 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
+                                    <a href= "{% url 'Katale:details' product.id %}" >
+
                                     <img width='225' height='230' src="{{product.image.url}}" alt="" />
+                                    </a>
+
                                     <h2>UGX {{ product.price }}</h2>
                                     <p>{{ product.product_name }}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    	<form method="post" action="{% url 'Katale:products' product.category.id %}">
+										        {% csrf_token %}
+												<input type="hidden" name="product_id" value="{{ product.id }}" />
+												<button type="submit" class="btn btn-fefault cart" value="Add">
+													<i class="fa fa-shopping-cart"></i>
+													Add to cart</button>
+											</form>
+
+                                    <!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
                                 </div>
                                 <!--<div class="product-overlay">-->
                                     <!--<div class="overlay-content">-->

@@ -12,6 +12,8 @@ urlpatterns = patterns('',
                        url(r'^account/$', views.account_details, name='account'),
                        url(r'^details/(?P<product_id>\w+)$', views.product_details, name='details'),
                        url(r'^products/(?P<category_id>\w+)$', views.products, name='products'),
+                       url(r'^cart/$', views.show_cart, name='cart'),
+
 
 
 

@@ -105,7 +105,10 @@ STATIC_URL = '/static/'
 # PROJECT_PATH = os.path.join(__file__
 # )
 MEDIA_ROOT = BASE_DIR + '/media/'
-#media root tells django wea uploaded fies should be stored on local disk
+# media root tells django wea uploaded fies should be stored on local disk
 
 MEDIA_URL = '/media/'
-#MEDIA_URL DEFINES THE BASE URL FRM WICH MEDIA FILES R ACCESSIBLE
+# MEDIA_URL DEFINES THE BASE URL FRM WHICH MEDIA FILES R ACCESSIBLE
+
+# Reconfiguring sessions settings
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 90

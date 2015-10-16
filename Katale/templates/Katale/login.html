@@ -33,18 +33,7 @@
 						<form method="post" action="/Katale/signup/">
 							{% csrf_token %}
 
-						<!--	{% if errors %}
-							{% for error in errors %}
-							<p style="color:red">{{ error }}</p>
-							{% endfor %}
-							{% endif %}
 
-							{% if error %}
-							{% for error in error %}
-							<p style="color:blue">{{ error }}</p>
-							{% endfor %}
-							{% endif %}
--->
 							{{ user_form.as_p }}
 							{{ user_profile.as_p }}
 

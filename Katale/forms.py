@@ -42,9 +42,29 @@ class UserRegistrationForm(ModelForm):
     city = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label="City")
     address = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label="Address")
     phone_number = forms.IntegerField(widget=forms.TextInput(attrs=dict(max_length=15, required=True)))
-    #birthdate = forms.DateField(widget=forms.TextInput(attrs=dict({'placeholder': 'yyyy-mm-dd'}, required=True)),)
-    birthdate = forms.DateField(widget=SelectDateWidget(years = range(2015, 1950, -1)))
+    birthdate = forms.DateField(widget=SelectDateWidget)
 
     class Meta:
         model = Users
         fields = ['city', 'address', 'phone_number', 'birthdate']
+
+
+class AddToCartForm(forms.Form):
+    quantity = forms.IntegerField(
+        widget=forms.TextInput(attrs={'size': '2', 'max_length': '5', 'value': '1', 'class': 'quantity'}),
+        error_messages={'invalid': 'Please enter a valid quantity'}, min_value=1)
+    product_id = forms.IntegerField(widget=forms.HiddenInput())
+
+    # override the default __init__ so we can set the request
+    def __init__(self, request=None, *args, **kwargs):
+        self.request = request
+        super(AddToCartForm, self).__init__(*args, **kwargs)
+
+    # custom validation to check for cookies
+    def clean(self):
+        if self.request:
+            if not self.request.session.test_cookie_worked():
+                raise forms.ValidationError('Cookies must be enabled on your computer')
+            return self.cleaned_data
+
+

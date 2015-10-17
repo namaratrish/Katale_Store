@@ -71,3 +71,13 @@ def remove_from_cart(request):
     cart_item = get_single_item(request, item_id)
     if cart_item:
         cart_item.delete()
+
+
+def cart_total_price(request):
+    cart_items = get_cart_items(request)
+    final_price = 0
+    for item in cart_items:
+        item_price = item.quantity * item.price
+        final_price += item_price
+
+    return final_price

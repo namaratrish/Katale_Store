@@ -36,7 +36,9 @@ def show_cart(request):
             cart.remove_from_cart(request)
     cart_items = cart.get_cart_items(request)
     cart_item_count = cart.cart_distinct_item_count(request)
-    return render(request, 'Katale/cart.html', {'products': cart_items, 'cart_count': cart_item_count, 'categories': category_list,})
+    # final_price = cart.cart_total_price(request)
+    return render(request, 'Katale/cart.html',
+                  {'products': cart_items, 'cart_count': cart_item_count, 'categories': category_list })
 
 
 def account_details(request):
@@ -46,29 +48,29 @@ def account_details(request):
 
 
 def product_details(request, product_id):
-
     category_list = Category.objects.order_by('created_at')
 
     product = Product.objects.get(pk=product_id)
-    cart_item_count = cart.cart_distinct_item_count(request)
+
     if request.method == 'POST':
         if request.user.is_authenticated():
             postdata = request.POST.copy()
             form = AddToCartForm(request, postdata)
             if form.is_valid():
                 cart.add_to_cart(request)
-            # if test cookie worked, get rid of it
+                # if test cookie worked, get rid of it
                 if request.session.test_cookie_worked():
                     request.session.delete_test_cookie()
-                cart_items = cart.get_cart_items(request)
-                return render(request, 'Katale/cart.html', {'products': cart_items, 'cart_count': cart_item_count})
+                    # cart_items = cart.get_cart_items(request)
+                    # return render(request, 'Katale/cart.html', {'products': cart_items, 'cart_count': cart_item_count})
         else:
             return render(request, 'Katale/login.html', {})
     else:
         form = AddToCartForm()
         form.fields['product_id'].widget.attrs['value'] = product_id
         request.session.set_test_cookie()
-        return render(request, 'Katale/details.html', {'categories': category_list, 'product': product, 'cart_form': form,
+    cart_item_count = cart.cart_distinct_item_count(request)
+    return render(request, 'Katale/details.html', {'categories': category_list, 'product': product, 'cart_form': form,
                                                    'cart_count': cart_item_count, })
 
 
@@ -76,21 +78,21 @@ def products(request, category_id):
     category_list = Category.objects.order_by('created_at')
 
     product = Product.objects.filter(category_id=category_id)
-   # product = Product.objects.filter(sub_category__category_id=category_id)
-    cart_item_count = cart.cart_distinct_item_count(request)
+    # product = Product.objects.filter(sub_category__category_id=category_id)
+
     if request.method == 'POST':
         if request.user.is_authenticated():
             cart.add_to_cart(request)
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
-            cart_items = cart.get_cart_items(request)
-            return render(request, 'Katale/cart.html', {'products': cart_items, 'cart_count': cart_item_count})
-
+            # cart_items = cart.get_cart_items(request)
+            # return render(request, 'Katale/cart.html', {'products': cart_items, 'cart_count': cart_item_count})
         else:
             return render(request, 'Katale/login.html', {})
-    else:
-        return render(request, 'Katale/products.html', {'categories': category_list, 'products': product,
-                                                    'cart_count': cart_item_count})
+
+    cart_item_count = cart.cart_distinct_item_count(request)
+    return render(request, 'Katale/products.html', {'categories': category_list, 'products': product,
+                                                        'cart_count': cart_item_count})
 
 
 def sign_up(request):
@@ -115,12 +117,15 @@ def sign_up(request):
         else:
             form_errors = user_form.errors
             formm_errors = user_profile.errors
-            return render(request, 'Katale/login.html', {'errors': form_errors, 'error': formm_errors, 'user_form': user_form, 'user_profile': user_profile})
+            return render(request, 'Katale/login.html',
+                          {'errors': form_errors, 'error': formm_errors, 'user_form': user_form,
+                           'user_profile': user_profile})
 
     else:
         user_form = UserForm()
         user_profile = UserRegistrationForm()
-    return render(request, 'Katale/login.html', {'user_form': user_form, 'user_profile': user_profile, 'categories': category_list})
+    return render(request, 'Katale/login.html',
+                  {'user_form': user_form, 'user_profile': user_profile, 'categories': category_list})
 
 
 def user_login(request):
@@ -131,7 +136,6 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-
 
                 return HttpResponseRedirect('/Katale/')
             else:

@@ -85,6 +85,7 @@
 								<p><b>Availability:</b> In Stock</p>
 								<p><b>Condition:</b> New</p>
 								<form method="post" action="{% url 'Katale:details' product.id %}" >
+								<!--<form method="post" action="." >-->
 										{% csrf_token %}
 										{{ cart_form.as_p}}
 

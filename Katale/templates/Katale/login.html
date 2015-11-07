@@ -11,10 +11,10 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
-						<form action="/Katale/login/" method="post">
+						<form action="{% url 'Katale:login' %}" method="post">
 							{% csrf_token %}
 							{% if message %}
-							<p>Invalid login details</p>
+							{{message}}
 							{% endif%}
 							<input type="text" placeholder="Username" name="username" />
 							<input type="password" placeholder="Password"  name="password"/>
@@ -28,6 +28,11 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
+						{% if registered %}
+						<script>
+                           alert('{{ message }}');
+                        </script>
+						{% endif%}
 						<h2>New User Signup!</h2>
 
 						<form method="post" action="/Katale/signup/">

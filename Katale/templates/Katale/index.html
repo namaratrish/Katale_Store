@@ -19,9 +19,9 @@
 							<div class="item active">
 
 								<div class="col-sm-6">
-									<!--<img src="{% static 'images/home/girl1.jpg' %}"  alt=""/>-->
-									<img src="{% static 'images/home/home_banner3.jpg' %}" alt="" width="970"/>
-									<!--<img src="{% static 'images/home/pricing.png' %}"  class="pricing" alt="" />-->
+
+									<img src="{% static 'images/home/home_banner3.jpg' %}" alt="" width="990" height="441"/>
+
 								</div>
 							</div>
 							<div class="item">
@@ -84,14 +84,14 @@
 							{% endfor %}
 							{% endif %}
 
-
-
 						</div><!--/category-products-->
 						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/on3.jpg' %}" alt="" />
+							<img src="{% static 'images/home/blank.png' %}" alt="" />
+							<img src="{% static 'images/home/on1.jpg' %}" alt="" />
+							<img src="{% static 'images/home/blank.png' %}" alt="" />
 							<img src="{% static 'images/home/shipping.jpg' %}" alt="" />
 						</div>
-
-
 
 					</div>
 				</div>
@@ -109,7 +109,7 @@
 											<a href= "{% url 'Katale:details' product.id %}" />
 											<img src="{{product.image.url}}" alt="" width="225" height="230" />
 										    </a>
-											<h2>UGX{{ product.price }}</h2>
+											<h2>UGX {{ product.price }}</h2>
 										    <p>{{ product.product_name }}</p>
 											<form method="post" action="." >
 										        {% csrf_token %}

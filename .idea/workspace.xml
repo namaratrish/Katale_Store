@@ -44,6 +44,7 @@
 
               <folding />
             </state>
+            </state>
           </provider>
         </entry>
       </file>
@@ -59,7 +60,7 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="details.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Katale/templates/Katale/details.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -137,9 +138,9 @@
 
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
+      </leaf>
+    </component>
+
 
       <file leaf-file-name="cart.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Katale/templates/Katale/cart.html">
@@ -153,8 +154,8 @@
           </provider>
         </entry>
       </file>
-    </leaf>
-  </component>
+  </project>
+
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>

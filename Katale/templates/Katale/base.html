@@ -27,6 +27,7 @@
 
 </head>
 <body>
+{% block header %}
 <header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -54,20 +55,21 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="#"><img src="{% static 'images/home/logo.png' %}" alt="" /></a>
+							<a href="#"><img src="{% static 'images/home/LOGGOO.jpg' %}" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 
-					</div>
 						</div>
+					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="/Katale/account/"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="/Katale/cart/"><i class="fa fa-shopping-cart"></i> Cart(<span style="color:#FE980F">{{ cart_count }}</span>)</a></li>
 
+								<li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="/Katale/cart/"><i class="fa fa-shopping-cart"></i> Cart(<span style="color:#FE980F">{{ cart_count }}</span>)</a>
+
+								</li>
 							{% if user.is_authenticated %}
 								<li class="dropdown" ><a href="#">{{ user.username}}<i class="fa fa-lock"></i></a>
 								    <ul role="menu" class="sub-menu">
@@ -76,8 +78,11 @@
 								    </ul>
 								</li>
 								{% else %}
-								<li><a href="/Katale/signup/"><i class="fa fa-lock"></i> Login/Sign Up</a></li>
+
+								<!--<li><a href="{% url 'Katale:login' %}?next={{request.path}}"><i class="fa fa-lock"></i> Login/Sign Up</a></li>-->
+								<li><a href="/Katale/login"><i  class="fa fa-lock"></i> Login</a></li>
 								{% endif %}
+								<li><a href="/Katale/signup/"><i class="fa fa-lock"></i>Sign Up</a></li>
 							</ul>
 						</div>
 					</div>
@@ -120,6 +125,7 @@
 								<!--<li><a href="contact-us.html">Contact</a></li>-->
 							</ul>
 						</div>
+
 					</div>
 					<div class="col-sm-3">
 						<!--<div class="search_box pull-right">
@@ -132,169 +138,169 @@
 		</div><!--/header-bottom-->
 			</div>
 	</header><!--/header-->
-
+{% endblock %}
 {% block site_content %}{% endblock %}
 
 
 
-{% block footer %}
-<footer id="footer">
-		<div class="footer-top">
-					<div class="col-sm-2">
-						<div class="companyinfo">
-							<h2><span>Katale</span></h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-						</div>
-					</div>
-					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{% static 'images/home/iframe1.png' %}" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 Sep 2015</h2>
-							</div>
-						</div>
+<!--{% block footer %}-->
+<!--<footer id="footer">-->
+		<!--<div class="footer-top">-->
+					<!--<div class="col-sm-2">-->
+						<!--<div class="companyinfo">-->
+							<!--<h2><span>Katale</span></h2>-->
+							<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-sm-7">-->
+						<!--<div class="col-sm-3">-->
+							<!--<div class="video-gallery text-center">-->
+								<!--<a href="#">-->
+									<!--<div class="iframe-img">-->
+										<!--<img src="{% static 'images/home/iframe1.png' %}" alt="" />-->
+									<!--</div>-->
+									<!--<div class="overlay-icon">-->
+										<!--<i class="fa fa-play-circle-o"></i>-->
+									<!--</div>-->
+								<!--</a>-->
+								<!--<p>Circle of Hands</p>-->
+								<!--<h2>24 Sep 2015</h2>-->
+							<!--</div>-->
+						<!--</div>-->
 
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{% static 'images/home/iframe2.png' %}" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 Sep 2015</h2>
-							</div>
-						</div>
+						<!--<div class="col-sm-3">-->
+							<!--<div class="video-gallery text-center">-->
+								<!--<a href="#">-->
+									<!--<div class="iframe-img">-->
+										<!--<img src="{% static 'images/home/iframe2.png' %}" alt="" />-->
+									<!--</div>-->
+									<!--<div class="overlay-icon">-->
+										<!--<i class="fa fa-play-circle-o"></i>-->
+									<!--</div>-->
+								<!--</a>-->
+								<!--<p>Circle of Hands</p>-->
+								<!--<h2>24 Sep 2015</h2>-->
+							<!--</div>-->
+						<!--</div>-->
 
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{% static 'images/home/iframe3.png' %}" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 Sep 2015</h2>
-							</div>
-						</div>
+						<!--<div class="col-sm-3">-->
+							<!--<div class="video-gallery text-center">-->
+								<!--<a href="#">-->
+									<!--<div class="iframe-img">-->
+										<!--<img src="{% static 'images/home/iframe3.png' %}" alt="" />-->
+									<!--</div>-->
+									<!--<div class="overlay-icon">-->
+										<!--<i class="fa fa-play-circle-o"></i>-->
+									<!--</div>-->
+								<!--</a>-->
+								<!--<p>Circle of Hands</p>-->
+								<!--<h2>24 Sep 2015</h2>-->
+							<!--</div>-->
+						<!--</div>-->
 
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{% static 'images/home/iframe4.png' %}" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 Sep 2015</h2>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="address">
-							<img src="{% static 'images/home/map.png' %}" alt="" />
-							<p>Lumambe Avenue, SoliZ House, 4th Floor</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						<!--<div class="col-sm-3">-->
+							<!--<div class="video-gallery text-center">-->
+								<!--<a href="#">-->
+									<!--<div class="iframe-img">-->
+										<!--<img src="{% static 'images/home/iframe4.png' %}" alt="" />-->
+									<!--</div>-->
+									<!--<div class="overlay-icon">-->
+										<!--<i class="fa fa-play-circle-o"></i>-->
+									<!--</div>-->
+								<!--</a>-->
+								<!--<p>Circle of Hands</p>-->
+								<!--<h2>24 Sep 2015</h2>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-sm-3">-->
+						<!--<div class="address">-->
+							<!--<img src="{% static 'images/home/map.png' %}" alt="" />-->
+							<!--<p>Lumambe Avenue, SoliZ House, 4th Floor</p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
 
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Service</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Online Help</a></li>
-								<li><a href="#">Contact Us</a></li>
-								<li><a href="#">Order Status</a></li>
-								<li><a href="#">Change Location</a></li>
-								<li><a href="#">FAQ’s</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Quock Shop</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">T-Shirt</a></li>
-								<li><a href="#">Mens</a></li>
-								<li><a href="#">Womens</a></li>
-								<li><a href="#">Gift Cards</a></li>
-								<li><a href="#">Shoes</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Policies</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Privecy Policy</a></li>
-								<li><a href="#">Refund Policy</a></li>
-								<li><a href="#">Billing System</a></li>
-								<li><a href="#">Ticket System</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Company Information</a></li>
-								<li><a href="#">Careers</a></li>
-								<li><a href="#">Store Location</a></li>
-								<li><a href="#">Affillate Program</a></li>
-								<li><a href="#">Copyright</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3 col-sm-offset-1">
-						<div class="single-widget">
-							<h2>About Katale</h2>
-							<form action="#" class="searchform">
-								<input type="text" placeholder="Your email address" />
-								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-								<p>Get the most recent updates from <br />our site and be updated your self...</p>
-							</form>
-						</div>
-					</div>
+		<!--<div class="footer-widget">-->
+			<!--<div class="container">-->
+				<!--<div class="row">-->
+					<!--<div class="col-sm-2">-->
+						<!--<div class="single-widget">-->
+							<!--<h2>Service</h2>-->
+							<!--<ul class="nav nav-pills nav-stacked">-->
+								<!--<li><a href="#">Online Help</a></li>-->
+								<!--<li><a href="#">Contact Us</a></li>-->
+								<!--<li><a href="#">Order Status</a></li>-->
+								<!--<li><a href="#">Change Location</a></li>-->
+								<!--<li><a href="#">FAQ’s</a></li>-->
+							<!--</ul>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-sm-2">-->
+						<!--<div class="single-widget">-->
+							<!--<h2>Quock Shop</h2>-->
+							<!--<ul class="nav nav-pills nav-stacked">-->
+								<!--<li><a href="#">T-Shirt</a></li>-->
+								<!--<li><a href="#">Mens</a></li>-->
+								<!--<li><a href="#">Womens</a></li>-->
+								<!--<li><a href="#">Gift Cards</a></li>-->
+								<!--<li><a href="#">Shoes</a></li>-->
+							<!--</ul>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-sm-2">-->
+						<!--<div class="single-widget">-->
+							<!--<h2>Policies</h2>-->
+							<!--<ul class="nav nav-pills nav-stacked">-->
+								<!--<li><a href="#">Terms of Use</a></li>-->
+								<!--<li><a href="#">Privecy Policy</a></li>-->
+								<!--<li><a href="#">Refund Policy</a></li>-->
+								<!--<li><a href="#">Billing System</a></li>-->
+								<!--<li><a href="#">Ticket System</a></li>-->
+							<!--</ul>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-sm-2">-->
+						<!--<div class="single-widget">-->
+							<!--<h2>About Shopper</h2>-->
+							<!--<ul class="nav nav-pills nav-stacked">-->
+								<!--<li><a href="#">Company Information</a></li>-->
+								<!--<li><a href="#">Careers</a></li>-->
+								<!--<li><a href="#">Store Location</a></li>-->
+								<!--<li><a href="#">Affillate Program</a></li>-->
+								<!--<li><a href="#">Copyright</a></li>-->
+							<!--</ul>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-sm-3 col-sm-offset-1">-->
+						<!--<div class="single-widget">-->
+							<!--<h2>About Katale</h2>-->
+							<!--<form action="#" class="searchform">-->
+								<!--<input type="text" placeholder="Your email address" />-->
+								<!--<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>-->
+								<!--<p>Get the most recent updates from <br />our site and be updated your self...</p>-->
+							<!--</form>-->
+						<!--</div>-->
+					<!--</div>-->
 
-				</div>
-			</div>
-		</div>
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
 
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
-				</div>
-			</div>
-		</div>
+		<!--<div class="footer-bottom">-->
+			<!--<div class="container">-->
+				<!--<div class="row">-->
+					<!--<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>-->
+					<!--<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
 
-	</footer>
+	<!--</footer>-->
 
-{% endblock footer %}
+<!--{% endblock footer %}-->
 
 
     <script src="{% static 'js/jquery.js' %}"></script>

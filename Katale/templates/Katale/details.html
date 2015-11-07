@@ -81,11 +81,14 @@
 								</span>
 								<p><b>Description:</b>{{product.description}}</p>
 
-
+                                 {% if product.quantity > 0 %}
 								<p><b>Availability:</b> In Stock</p>
+								{% else %}
+								<p><b>Availability:</b>Out of Stock</p>
+								{% endif %}
 								<p><b>Condition:</b> New</p>
 								<form method="post" action="{% url 'Katale:details' product.id %}" >
-								<!--<form method="post" action="." >-->
+
 										{% csrf_token %}
 										{{ cart_form.as_p}}
 

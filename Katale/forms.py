@@ -4,12 +4,28 @@ __author__ = 'LT10'
 
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Users
+from .models import Users, Category, Product
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 
 BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
 
+
+class CategoryForm(ModelForm):
+    category = forms.CharField(widget=forms.TextInput(attrs=dict(required=True)))
+    description = forms.Textarea()
+
+    class Meta:
+        model = Category
+        fields = ['category', 'description']
+
+
+class ProductForm(ModelForm):
+    image = forms.ImageField()
+
+    class Meta:
+        model = Product
+        fields = "__all__"
 
 class UserForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

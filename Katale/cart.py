@@ -73,11 +73,22 @@ def remove_from_cart(request):
         cart_item.delete()
 
 
+def update_cart(request):
+    postdata = request.POST.copy()
+    item_id = postdata['product_id']
+    quantity = postdata['quantity']
+    cart_item = get_single_item(request, item_id)
+    if cart_item:
+        if int(quantity) > 0:
+            cart_item.quantity = int(quantity)
+            cart_item.save()
+        else:
+            remove_from_cart(request)
+
+
 def cart_total_price(request):
     cart_items = get_cart_items(request)
     final_price = 0
     for item in cart_items:
-        item_price = item.quantity * item.price
-        final_price += item_price
-
+        final_price += item.quantity * item.product.price
     return final_price

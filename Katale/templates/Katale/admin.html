@@ -1,0 +1,219 @@
+{% extends 'Katale/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Katale | Admin{% endblock title %}
+
+{% block header %}
+<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="#"><img src="{% static 'images/home/LOGGOO.jpg' %}" alt="" /></a>
+						</div>
+						<div class="btn-group pull-right">
+
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="/Katale/account/"><i class="fa fa-user"></i> Account</a></li>
+
+								<li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="/Katale/cart/"><i class="fa fa-shopping-cart"></i> Cart(<span style="color:#FE980F">{{ cart_count }}</span>)</a></li>
+
+							{% if user.is_authenticated %}
+								<li class="dropdown" ><a href="#">{{ user.username}}<i class="fa fa-lock"></i></a>
+								    <ul role="menu" class="sub-menu">
+
+								    	<li ><a href="/Katale/logout" style="background-color:transparent">Logout</a></li>
+								    </ul>
+								</li>
+								{% else %}
+								<li><a href="/Katale/signup/"><i class="fa fa-lock"></i> Login/Sign Up</a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="/Katale/" class="active">Home</a></li>
+                                <li><a href="#addCategory" class="active">Add category</a></li>
+                                <li><a href="#addProduct" class="active">Add product</a></li>
+								<li><a href="#viewCategory" class="active">View Categories</a></li>
+								<li><a href="#viewProduct" class="active">View products</a></li>
+
+
+                                </li>
+
+							</ul>
+						</div>
+
+					</div>
+					<div class="col-sm-3">
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+			</div>
+	</header><!--/header-->
+{% endblock %}
+
+{% block site_content %}
+<div class="container">
+    <!--<script>-->
+    <!--alert('{{ message }}');-->
+<!--</script>-->
+<a name="addCategory" />
+    <div class="step-one">
+        <h2 class="heading">Add Category</h2>
+    </div>
+    <form action="/Katale/admin/" method="post">
+        {% csrf_token %}
+		{{ category_form.as_p}}
+		<button type="submit" class="btn btn-default" name="submit" value="category">Add Category</button>
+    </form>
+<a name="addProduct" />
+    <div class="step-one">
+        <h2 class="heading">Add Product</h2>
+    </div>
+    <form action="/Katale/admin/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ product_form.as_p}}
+		<button type="submit" class="btn btn-default" name="submit" value="product">Add Product</button>
+    </form>
+<a name="viewCategory" />
+	 <div class="step-one">
+        <h2 class="heading">Available Categories</h2>
+
+	 </div>
+	<form method="post" action="/Katale/admin/">
+		{% csrf_token %}
+	{% if categories %}
+	{% for category in categories %}
+	<input type="checkbox" name="categories" id="{{category.id}}" value="{{category.category}}" />
+	<label for="{{category.id}}">{{category.category}}</label><br />
+	{% endfor %}
+	{% endif %}
+		<button type="submit" name="submit" value="DeleteCategory" class="btn btn-default">Delete Category</button>
+	</form>
+<a name="viewProduct" />
+	<div class="step-one">
+		<h2 class="heading">Available Products</h2>
+	</div>
+	<section id="cart_items">
+	<div class="table-responsive cart_info">
+		{%if products %}
+		<table class="table table-condensed">
+			<thead>
+			<tr class="cart_menu">
+				<td class="image">Item</td>
+				<td class="description">Name</td>
+				<td class="price">Price</td>
+				<td class="quantity">Quantity</td>
+				<td class="total">Category</td>
+				<td></td>
+			</tr>
+			</thead>
+			{% endif %}
+			{% if products %}
+			{% for product in products %}
+			<tbody>
+
+			<tr>
+				<td class="cart_product">
+					<!--<a href=""><img src="{{product.image.url}}" alt=""></a>-->
+					<img src="{{product.image.url}}" alt="" height="110" width="110"/>
+				</td>
+				<td class="cart_description">
+					<h4><a href=>{{product.product_name}}</a></h4>
+					<p style="color:transparent" >kkk</p>
+				</td>
+				<td class="cart_price">
+					<form method="post" action=".">
+						{% csrf_token %}
+						<input type="hidden" name="product_id" value="{{product.id}}">
+						<input class="cart_quantity_input" type="text" name="price" value={{product.price}} autocomplete="off" size="6">
+					<button class="cart_quantity_input" type="submit" name="submit" value="UpdatePrice">Update</button>
+						<!--<p>{{product.price}}</p>-->
+					</form>
+				</td>
+				<td class="cart_quantity">
+					<div class="cart_quantity_button">
+
+						<form method="post" action=".">
+							{% csrf_token %}
+							<input class="cart_quantity_input" type="text" name="quantity" value={{product.quantity}} autocomplete="off" size="2">
+							<input type="hidden" name="product_id" value="{{product.id}}">
+							<button class="cart_quantity_input" type="submit" name="submit" value="UpdateQuantity">Update</button>
+
+						</form>
+					</div>
+				</td>
+				<td class="cart_price">
+					<p>{{product.category}}</p>
+				</td>
+				<td class="cart_delete">
+					<form method="post" action=".">
+						{% csrf_token %}
+						<input type="hidden" name="product_id" value="{{ product.id }}" />
+						<button type="submit" name="submit" value="DeleteProduct" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+
+					</form>
+				</td>
+			</tr>
+			{% endfor %}
+
+			{% else %}
+
+			<div class="container">
+				<h3>You have no products</h3>
+			</div>
+			{% endif %}
+			</tbody>
+
+		</table>
+	</div>
+		</section>
+</div>
+
+{% endblock%}

@@ -64,6 +64,7 @@ def product_details(request, product_id):
                 if request.session.test_cookie_worked():
                     request.session.delete_test_cookie()
 
+
         else:
             return render(request, 'Katale/login.html', {})
     else:
